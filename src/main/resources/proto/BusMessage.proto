@@ -1,0 +1,33 @@
+syntax = "proto3";
+package gov.noaa.alaskafisheries.messaging.dto;
+
+import "any.proto";
+
+option java_package = "com.akmade.messaging.dto";
+option java_outer_classname = "MessagingDTO";
+
+// [START messages]
+message BusMessage {
+
+  message BusMessageStatus{
+    string process = 1;
+    string guid = 2;
+    int32 step = 3;
+    bool valid = 4;
+    repeated string messages = 5;
+    bool undelivered = 6;
+  }
+  
+  BusMessageStatus status = 1;
+  
+  message BusMessageKeyValueCommand {
+    string key = 1;
+    string value = 2;
+  }
+  
+  string command = 2;
+  repeated BusMessageKeyValueCommand key_value_commands = 3;
+  
+  repeated google.protobuf.Any objects = 4;
+  
+}  
